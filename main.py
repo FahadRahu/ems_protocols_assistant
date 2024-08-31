@@ -10,7 +10,7 @@ def main():
           "This tool is incomplete and should not be used as clinical/legal advice/aid in any way\n\n")
 
     emergency_type = input("Enter the type of emergency: ")  # Nature of the Emergency
-    demograph_info.demographic_choice()  # Patient Demographics
+    demograph_info.demographic_choice() # Patient Demographics
 
 
 if __name__ == "__main__":
