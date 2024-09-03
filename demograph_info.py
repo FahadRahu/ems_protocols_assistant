@@ -4,24 +4,24 @@ def pt_age_check():
           'If the patient is \u2264 1-Year\'s-old: \n'
           'Type the letter "I" for Infant (Aged 1 month - 12 months) or '
           '"N" for Neonate (0 - 1 month old) respectively. \n')
-    pt_age_fufillment_check = False
-    while not pt_age_fufillment_check:
+    pt_age_fulfillment_check = False
+    while not pt_age_fulfillment_check:
         pt_age = input('Enter Patient\'s Age: ')
         if pt_age.isdigit():  # Check to see if the input is numeric
             pt_age = int(pt_age)
             if pt_age >= 18:
                 pt_age_type_global = 'Adult'
                 pt_age_type_local = 'Adult'
-                pt_age_fufillment_check = True
+                pt_age_fulfillment_check = True
             elif 1 <= pt_age < 18:
                 pt_age_type = 'Pediatric'
                 pt_age_type_local = 'Child'
-                pt_age_fufillment_check = True
+                pt_age_fulfillment_check = True
         elif pt_age.isalpha():  # Check to see if input is a letter
             if pt_age.upper() == 'I' or pt_age.upper() == 'INF' or pt_age.upper() == 'INFANT':
                 pt_age_type_global = 'Pediatric'
                 pt_age_type_local = 'Infant'
-                pt_age_fufillment_check = True
+                pt_age_fulfillment_check = True
                 pt_age_month_check = False
                 print('')
                 pt_age_months = input('Enter Patient\'s Age in Months: ')
@@ -43,13 +43,14 @@ def pt_age_check():
             elif pt_age.upper() == 'N' or pt_age.upper() == 'NEO' or pt_age.upper() == 'NEONATE':
                 pt_age_type_global = 'Pediatric'
                 pt_age_type_local = 'Neonate'
-                pt_age_fufillment_check = True
+                pt_age_fulfillment_check = True
             else:
                 print('Invalid input. Please enter "I", "N", or valid age.\n')
                 continue
         else:
             print('Invalid input. Please enter "I", "N", or valid age.\n')
             continue
+
 
 def pt_sex():  # Patient's sex (M/F) THIS WORKS
     sex_of_pt = str(input('Is the patient Male or Female?\n'
