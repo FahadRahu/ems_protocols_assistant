@@ -21,7 +21,7 @@ def avpu_check():
         avpu_score = 1
 
 
-def general_cardiac ():
+def general_cardiac():
     print('Check for a central pulse.')
     pulse_presence = input('Does the patient have a pulse (Y/N): ')
     pulse_presence = pulse_presence.upper()
@@ -38,4 +38,3 @@ def general_cardiac ():
         print('Assess the patient\'s perfusion: \n\n'
               'Measure Heart Rate, Skin Color, Capillary Refill, Quality of Pulses')
     print('g')
-general_cardiac()
