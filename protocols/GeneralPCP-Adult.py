@@ -31,10 +31,25 @@ def general_cardiac():
         pulse_presence = pulse_presence.upper()
     if pulse_presence == 'N':
         # GO TO CPR - UNCODED PROTOCOL
-        print('Refer to Cardiac Arrest: General Approach')
+        print('Refer to Cardiac Arrest: General Approach\n')
         print('Start CPR')
+        print('High Performance CPR if indicated - start continuous chest compressions \n'
+              'Place Patient on an OPA and NRB at 15 LPM until resources allow \n'
+              'Once you have resources (people) available, start positive pressure ventilation with bag-valve mask')
         return
     else:
-        print('Assess the patient\'s perfusion: \n\n'
+        print('')
+        print('Assess the patient\'s perfusion: \n'
               'Measure Heart Rate, Skin Color, Capillary Refill, Quality of Pulses')
-    print('g')
+
+
+def general_respiratory():
+    print('Ensure that the patient\'s airway is intact. \n'
+          'If the patient is not breathing, consider positive pressure ventilation. \n\n'
+          'Check: Lung Sounds, Respiratory Rate, Work of Breathing, SpO2/EtCO2')
+    spo2_status_fulfillment_check = False
+    while not spo2_status_fulfillment_check:
+        spo2_status = input('Enter Patient\'s SpO2 as a percentage (0-100). \n'
+                            'If you need a table of the meaning of different value, type "help" \n'
+                            'If you would like to skip this step, and the patient is not hypoxic, enter "100" \n\n'
+                            'Enter patient SpO2:')
