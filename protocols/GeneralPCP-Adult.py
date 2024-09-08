@@ -44,12 +44,43 @@ def general_cardiac():
 
 
 def general_respiratory():
-    print('Ensure that the patient\'s airway is intact. \n'
-          'If the patient is not breathing, consider positive pressure ventilation. \n\n'
-          'Check: Lung Sounds, Respiratory Rate, Work of Breathing, SpO2/EtCO2')
+    global spo2_status
+    print('Ensure that the patient\'s airway is intact. \n\n'
+          'If the patient is not breathing, consider positive pressure ventilation. \n'
+          'Check: Lung Sounds, Respiratory Rate, Work of Breathing, SpO2/EtCO2\n')
     spo2_status_fulfillment_check = False
+    print('Enter Patient\'s SpO2 percentage as an integer (0-100). \n'
+          'Type "help" for SpO2 table, to skip this step, if patient is not hypoxic, enter "100"\n'
+          'If you suspect a False SpO2 reading, check perfusion and for cyanosis, '
+          'and consider administering O2\n')
+    # All this below is assuming the airway is intact
     while not spo2_status_fulfillment_check:
-        spo2_status = input('Enter Patient\'s SpO2 as a percentage (0-100). \n'
-                            'If you need a table of the meaning of different value, type "help" \n'
-                            'If you would like to skip this step, and the patient is not hypoxic, enter "100" \n\n'
-                            'Enter patient SpO2:')
+        spo2_status = input('Enter Patient SpO2%: ')
+        if spo2_status.isdigit() and 0 <= int(spo2_status) <= 100:
+            spo2_status_fulfillment_check = True
+            spo2_status = int(spo2_status)
+            if 92 <= spo2_status <= 100:
+                print('Normal SpO2 Range, consider O2 by Nasal Cannula if necessary')
+            elif 90 <= spo2_status < 92:
+                print('Mild Hypoxia - Administer O2 on Nasal Cannula at 2-6 LPM')
+            elif 86 <= spo2_status < 90:
+                print('Moderate Hypoxia - Administer O2 on Non-Re-breather at 12-15 LPM')
+            elif spo2_status < 86:
+                print('Severe Hypoxia - Administer O2 on CPAP/BVM/LTA(King Airway) with adjuncts as necessary')
+            else:
+                print('There\'s been an error, try again')
+                spo2_status_fulfillment_check = False
+        elif spo2_status.isalpha():
+            if spo2_status.upper() == 'HELP':
+                print('Reference Table for SpO2 readings: \n\n'
+                      '92% - 100%: Normal SpO2 Range, consider O2 by Nasal Cannula if necessary \n'
+                      '90% - 91%: Mild Hypoxia - Administer O2 on Nasal Cannula at 2-6 LPM \n'
+                      '86% - 89%: Moderate Hypoxia - Administer O2 on Non-Re-breather at 12-15 LPM \n'
+                      '<86%: Severe Hypoxia - Administer O2 on CPAP/BVM/LTA(King Airway) with adjuncts as necessary '
+                      '\n')
+                # spo2_status_fulfillment_check = False
+            else:
+                print('There\'s been an error, try again \n')
+                # spo2_status_fulfillment_check = False
+        else:
+            print('Invalid input, try again\n')
