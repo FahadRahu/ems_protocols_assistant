@@ -1,5 +1,5 @@
 import demograph_info
-
+from protocols import GeneralPCP_Adult
 import string
 
 
@@ -16,6 +16,11 @@ def main():
     # Patient Demographics
     demograph_info.pt_sex()
     demograph_info.pt_age_check()
+
+    # General Patient Care - Adult
+    GeneralPCP_Adult.avpu_check()
+    GeneralPCP_Adult.general_cardiac()
+    GeneralPCP_Adult.general_respiratory()
 
 
 if __name__ == "__main__":
