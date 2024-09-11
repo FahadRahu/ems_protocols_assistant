@@ -52,6 +52,7 @@ def pt_age_check():
             continue
     print('')
 
+
 def pt_sex():  # Patient's sex (M/F) THIS WORKS
     sex_of_pt = str(input('Is the patient Male or Female?\n'
                           '(Enter Male/Female or M/F): '))

@@ -17,30 +17,40 @@ def avpu_check():
         avpu_score = 3
     elif avpu_status == 'P':
         avpu_score = 2
-    else:
+    elif avpu_status == 'U':
         avpu_score = 1
+    else:
+        print('We failed somehow in the AVPU check, I\'m not sure how you got here')
     print('')
+    return avpu_score
+
 
 def general_cardiac():
     print('Check for a central pulse.')
-    pulse_presence = input('Does the patient have a pulse (Y/N): ')
+    pulse_presence = input('Does the patient have a pulse (Y/N): ')  # Key Variable for function
     pulse_presence = pulse_presence.upper()
     while pulse_presence not in ['Y', 'N']:
         print('Invalid input, enter Y/N\n')
         pulse_presence = input('Does the patient have a pulse (Y/N): ')
         pulse_presence = pulse_presence.upper()
     if pulse_presence == 'N':
+        pulse_status = False
         # GO TO CPR - UNCODED PROTOCOL
         print('Refer to Cardiac Arrest: General Approach\n')
         print('Start CPR')
         print('High Performance CPR if indicated - start continuous chest compressions \n'
               'Place Patient on an OPA and NRB at 15 LPM until resources allow \n'
               'Once you have resources (people) available, start positive pressure ventilation with bag-valve mask')
-        return
-    else:
+        pass
+    elif pulse_presence == 'Y':
+        pulse_status = True
         print('')
         print('Assess the patient\'s perfusion: \n'
               'Measure Heart Rate, Skin Color, Capillary Refill, Quality of Pulses')
+    else:
+        print('This shouldn\'t happen - Error in General Cardiac')
+
+    return(pulse_status)
 
 
 def general_respiratory():
