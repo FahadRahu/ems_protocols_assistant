@@ -7,6 +7,7 @@ def avpu_check():
           'U = Unresponsive: Patient Responds to Unresponsive Stimulus \n')
     avpu_status = input('Enter Patient Mental Status (A/V/P/U): ')
     avpu_status = avpu_status.upper()
+
     while avpu_status not in ['A', 'V', 'P', 'U']:
         print('Invalid input, enter A/V/P/U\n')
         avpu_status = input('Enter Patient Mental Status (A/V/P/U): ')
@@ -21,18 +22,22 @@ def avpu_check():
         avpu_score = 1
     else:
         print('We failed somehow in the AVPU check, I\'m not sure how you got here')
+
     print('')
     return avpu_score
 
 
-def general_cardiac():
+def general_cardiac():  # All this checks is if the patient has a pulse
+
     print('Check for a central pulse.')
     pulse_presence = input('Does the patient have a pulse (Y/N): ')  # Key Variable for function
     pulse_presence = pulse_presence.upper()
+
     while pulse_presence not in ['Y', 'N']:
         print('Invalid input, enter Y/N\n')
         pulse_presence = input('Does the patient have a pulse (Y/N): ')
         pulse_presence = pulse_presence.upper()
+
     if pulse_presence == 'N':
         pulse_status = False
         # GO TO CPR - UNCODED PROTOCOL
@@ -42,18 +47,20 @@ def general_cardiac():
               'Place Patient on an OPA and NRB at 15 LPM until resources allow \n'
               'Once you have resources (people) available, start positive pressure ventilation with bag-valve mask')
         pass
+
     elif pulse_presence == 'Y':
         pulse_status = True
         print('')
         print('Assess the patient\'s perfusion: \n'
               'Measure Heart Rate, Skin Color, Capillary Refill, Quality of Pulses')
+
     else:
         print('This shouldn\'t happen - Error in General Cardiac')
 
-    return(pulse_status)
+    return pulse_status
 
 
-def general_respiratory():
+def general_respiratory():  # Checks airway_status (boolean), and SpO2 status (int or NoneType)
     # global spo2_status  - <<-- What is the purpose of making this global
 
     # Check if the Patient has an Intact Airway:
@@ -62,14 +69,14 @@ def general_respiratory():
           'Check: Lung Sounds, Respiratory Rate, Work of Breathing, SpO2/EtCO2\n')
 
     airway_status_check = False
+
     while not airway_status_check:
-        airway_status = input('Does the patient have an intact airway? \n'
-                              'Enter Y/N, or "help" for common incubation references: ')
+        airway_status_input = input('Does the patient have an intact airway? \n'
+                                    'Enter Y/N, or "help" for common incubation references: ').strip().upper()
         print('')
-        airway_status: str = airway_status.upper()
 
         # If User enters 'help'
-        if airway_status == 'HELP':
+        if airway_status_input == 'HELP':
             print('Reference Table for Indications for Intubation: \n'
                   'No Signs of Respiratory Failure - Hypoxic or Hypercapic \n'
                   'Apneic \n'
@@ -80,18 +87,17 @@ def general_respiratory():
                   'Trauma to the Larynx or Penetrating Injuries to Neck, Abdomen, and Chest \n')
 
         # If the Patient does have an intact airway:
-        elif airway_status == 'Y':
+        elif airway_status_input == 'Y':
             spo2_status_fulfillment_check = False
-            print('Enter Patient\'s SpO2 percentage as an integer (0-100). \n'
-                  'Type "help" for SpO2 table, to skip this step, if patient is not hypoxic, enter "100"\n'
-                  'If you suspect a False SpO2 reading, check perfusion and for cyanosis, '
-                  'and consider administering O2\n')
+
             # All this below is assuming the airway is intact
             while not spo2_status_fulfillment_check:
-                spo2_status = input('Enter Patient SpO2%: ')
+                spo2_status = input('Enter Patient SpO2% (0-100) or type "help": ').strip()
+
                 if spo2_status.isdigit() and 0 <= int(spo2_status) <= 100:
-                    spo2_status_fulfillment_check = True
                     spo2_status = int(spo2_status)
+                    spo2_status_fulfillment_check = True
+
                     if 92 <= spo2_status <= 100:
                         print('Normal SpO2 Range, consider O2 by Nasal Cannula if necessary')
                     elif 90 <= spo2_status < 92:
@@ -104,7 +110,10 @@ def general_respiratory():
                     else:
                         print('There\'s been an error, try again')
                         spo2_status_fulfillment_check = False
+                    print('Always check perfusion and for cyanosis if false SpO2% is suspected. \n')
+
                 elif spo2_status.isalpha():
+
                     if spo2_status.upper() == 'HELP':
                         print('Reference Table for SpO2 readings: \n\n'
                               '92% - 100%: Normal SpO2 Range, consider O2 by Nasal Cannula if necessary \n'
@@ -113,18 +122,28 @@ def general_respiratory():
                               '<86%: Severe Hypoxia - Administer O2 on CPAP/BVM/LTA(King Airway) '
                               'with adjuncts as necessary \n')
                         # spo2_status_fulfillment_check = False
+
                     else:
                         print('There\'s been an error, try again \n')
                         # spo2_status_fulfillment_check = False
+
                 else:
                     print('Invalid input, try again\n')
 
+            airway_status = True
             airway_status_check = True
+            return airway_status, spo2_status
 
         # If the patient does not have an intact airway
-        elif airway_status == 'N':
+        elif airway_status_input == 'N':
             print('Intubate Patient: Administer 15 LPM O2 with Bag-Valve-Mask or LTA (King Airway) \n'
                   'Check the patient\'s pulse frequently.\n'
-                  'Administer CPR if pulse is weak or absent and if pulse is less than 60 bpm. ')
+                  'Administer CPR if pulse is weak or absent and if pulse is less than 60 bpm. \n')
+
+            airway_status = False
             airway_status_check = True
-    print('')
+            spo2_status = None
+            return airway_status, spo2_status
+
+        else:
+            print('Broken Code in General Respiratory Block - This shouldn\'t happen')
