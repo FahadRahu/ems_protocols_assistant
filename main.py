@@ -5,7 +5,7 @@ import string
 
 def main():
     # Greet User
-    print("Welcome to the Prince William County EMS Protocol Assistant.\n"
+    print("Welcome to the Prince William County EMS Protocol Assistant!\n\n"
           "This tool guides users on what procedures and variables to be aware of in the context of their emergency.\n"
           "This tool is incomplete and should not be used as clinical/legal advice/aid in any way\n\n")
 

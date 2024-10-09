@@ -147,3 +147,30 @@ def general_respiratory():  # Checks airway_status (boolean), and SpO2 status (i
 
         else:
             print('Broken Code in General Respiratory Block - This shouldn\'t happen')
+
+# 1. ** insert Medical: Allergic Reaction Protocol
+
+# 2. ** insert Clinical Procedure: Selective Spinal Motion Restriction (SSMR)
+
+# 3. ** insert General Patient Care Protocol ‐ Adult Trauma.
+
+# 4. Obtain SAMPLE and OPQRST
+
+# 5. Evaluate	pupillary	reaction,	motor	function,	sensation	and	GCS.
+
+# 6. Assess for the possibility of a stroke
+
+# 7. Record Vitals [LOC, HR, RR, Skin (Color, Condition, Temp), BP, BGL, SPO2, and ETCO2]
+# Record Every 5 minutes if pt is critical, or 15 minutes for non-critical
+
+# 8. Consider 12 Lead - Possibly make its own file
+
+# 9. ** insert Clinical Procedure: Blood Glucose Analysis
+
+# 10. ** insert Medical: Diabetic Emergencies - for BOTH hypo/hyperglycemia
+
+# 11. Consider Zofran for nausea
+
+# 12. Consider Naloxone 2mg IN for suspected opiate overdose
+
+# 13. Transport Patient and minimize on-scene time
