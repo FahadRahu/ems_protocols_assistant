@@ -17,15 +17,15 @@ def pt_age_check():
                 age_measurement_type = "Years"
                 pt_age_fulfillment_check = True
                 print('')
-                return pt_age, pt_age_type_global, pt_age_type_local, age_measurement_type
+                return pt_age_type_global, pt_age_type_local, pt_age, age_measurement_type
 
             elif 1 <= pt_age < 18:
-                pt_age_type = 'Pediatric'
+                pt_age_type_global = 'Pediatric'
                 pt_age_type_local = 'Child'
                 age_measurement_type = "Years"
                 pt_age_fulfillment_check = True
                 print('')
-                return pt_age, pt_age_type, pt_age_type_local, age_measurement_type
+                return pt_age_type_global, pt_age_type_local, pt_age, age_measurement_type
 
         elif pt_age.isalpha():  # Check to see if input is a letter
 
@@ -44,7 +44,7 @@ def pt_age_check():
                             pt_age_type_local = 'Infant'
                             age_measurement_type = "Months"
                             pt_age_month_check = True
-                            return pt_age, pt_age_type_global, pt_age_type_local, age_measurement_type
+                            return pt_age_type_global, pt_age_type_local, pt_age, age_measurement_type
                         else:
                             print('Patient\'s Age in months must be between 1 and 12\n')
                             pt_age_months = input('Enter Patient\'s Age in Months: ')
@@ -68,7 +68,7 @@ def pt_age_check():
                     if pt_age_days.isdigit():
                         pt_age_days = int(pt_age_days)
                         if 0 <= pt_age_days <= 31:
-                            return pt_age, pt_age_type_global, pt_age_type_local, age_measurement_type
+                            return pt_age_type_global, pt_age_type_local, pt_age, age_measurement_type
                         else:
                             print('Patient\'s Age in Days must be between 0 and 31\n')
                             pt_age_days = input('Enter Patient\'s Age in Days: ')
