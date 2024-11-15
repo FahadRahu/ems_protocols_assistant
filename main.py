@@ -17,7 +17,7 @@ def main():
     print('')
 
     # Patient Demographics
-    pt_report['Sex'] = pt_sex = demograph_info.pt_sex()
+    pt_report['Sex'] = demograph_info.pt_sex()
     pt_report.update(zip(['Global Age Type', 'Local Age Type', 'Age', 'Age Measurement'],
                          demograph_info.pt_age_check()))
 

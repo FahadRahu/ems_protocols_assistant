@@ -53,6 +53,7 @@ def returning_specific_parameter_for_function():
         x = 5
         y = 10
         return x, y
+
     # Unpack the returned values
     a, b = function_1()  # The two arguments are returned are set to equal the two new arguments 'a' and 'b'
     # Now 'b' is the second value (y)
@@ -63,6 +64,28 @@ def returning_specific_parameter_for_function():
         x = 5
         y = 10
         return x, y
+
     # Accessing the second value (y) using index 1
     result = function_2()  # Two arguments --> Result // type(result) is a tuple
     print(result[1])  # Output: 10
+
+
+# 11/15/2024
+def class_ship_function():  # Practice using classes and how they work
+    class Ship:  # Creates the class "Ship" so we can now create instances of "Ship"
+
+        def __init__(self, name, capacity):
+            # ^^^^ Anytime we make an instance of "Ship" and "__init__" is used, the function is auto executed.
+            self.name = name
+            self.capacity = capacity
+            self.cargo = 0
+            # ^^^^^ The parameters name and capacity are applied to the object BECAUSE we used "self.[parameter]"
+
+        # sail function that only executes after a call
+        def sail(self, location):
+            self.location = location
+            return "The {} has sailed for {}".format(self.name, self.location)
+
+    black_pearl = Ship("Black Pearl", 800)
+    black_pearl.sail(input())
+    print(black_pearl.location)
