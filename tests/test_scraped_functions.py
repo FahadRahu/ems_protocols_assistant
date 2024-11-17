@@ -89,3 +89,13 @@ def class_ship_function():  # Practice using classes and how they work
     black_pearl = Ship("Black Pearl", 800)
     black_pearl.sail(input())
     print(black_pearl.location)
+
+
+def more_class_practice():
+    class Patient:
+        def __init__(self, name=None, age=None):
+            self.name = name
+            self.age = age
+            # Setting vitals and labs to groups make it easier to read and understand
+            self.vitals = {'pulse': None, 'blood_pressure': None, 'temperature': None}
+            self.labs = {'blood_glucose': None, 'cholesterol': None}

@@ -1,9 +1,9 @@
-Unfinished README.md
+"""
+THIS IS THE PRIMARY IMPORTS FILE USED FOR main.py
+This file contains all the imports that will be used for main.py
+All the functions that are from the files in the procedures directory AND the protocols directory, will be placed here
 
-This project is something I keep adding to when I can. It is an assistant tool for EMS personnel to use to determine
-what protocol to follow.
-
-HOW TO USE IMPORTS.PY SYSTEM:
+HOW TO USE imports.py SYSTEM:
 
 1. [procedures/{file_name}]: Create functions on independent python files in procedures/
 
@@ -32,16 +32,16 @@ HOW TO USE IMPORTS.PY SYSTEM:
 
 3. [protocols/{file_name}.py]: Import the procedures/import.py file to utilize procedures/ functions
 
-    for example, for importing PARTICULAR FUNCTIONS - ON PROTOCOLS/MEDICAL_PROTOCOLS.PY YOU WRITE:
+    for example, for importing PARTICULAR FUNCTIONS - ON PROTOCOLS/MEDICIAL_PROTOCOLS.PY YOU WRITE:
     from procedures.imports import blood_glucose_analysis, ocp
 
-    or, for example, if you want the ENTIRE MODULE imported - ON PROTOCOLS/MEDICAL_PROTOCOLS YOU WRITE:
+    or, for example, if you want the ENTIRE MODULE imported - ON PROTOCOLS/MEDICIAL_PROTOCOLS YOU WRITE:
     from procedures import imports as proc_imports
     (but this has a problem, calling a function is a lot of words (i.e. - proc_imports.ocp.blood_glucose_analysis())
 
     or alternatively, for example, if you want the ENTIRE MODULE imported - ON PROCEDURES/import.py YOU WRITE:
     from procedures.imports import ocp
-    (to call a function from ocp, you would write ex. ocp.blood_glucose_analysis())
+    (to call a fuction from ocp, you would write ex. ocp.blood_glucose_analysis())
 
 
     A. To Utilize any and ALL functions On protocols/{file_name}
@@ -156,3 +156,7 @@ HOW TO USE IMPORTS.PY SYSTEM:
 
         a. To call a function it's long, but this is what you'd write:
             prot_imports.medical.bls_adult_alt_mental_status_syncope()
+
+    B. Keep in mind, we need to use __all__ in protocols/imports.py so that we can directly call very specific
+        functions all the way back to procedures/{file_name}.py
+"""

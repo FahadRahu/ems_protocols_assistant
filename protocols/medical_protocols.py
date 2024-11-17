@@ -1,3 +1,6 @@
+from procedures import other_clinical_procedures
+
+
 # BOTH Adult and Pediatric Protocols Available:
 def bls_adult_medical_allergic_reaction():
     print(f"1. Follow the General Patient Care Protocol for Adult patients.\n"
@@ -17,7 +20,7 @@ def bls_pediatric_medical_allergic_reaction():
 
 
 # Unfinished - Needs functions to refer to many different protocols.
-def bls_adult_alt_mental_status_syncope(patient):
+def bls_adult_alt_mental_status_syncope():
     print("Follow the advice consistent with the General Patient Care Protocol - Adult\n")
     print("Obtain Blood Glucose Level - Refer to Medical: Diabetic Emergencies")
     print("Obtain a 12-Lead ECG - \n"
@@ -26,6 +29,8 @@ def bls_adult_alt_mental_status_syncope(patient):
           "If sepsis is suspected (high in age, high risk for infection, febrile/showing fever symptoms - "
           "refer to - Medical: Sepsis\n"
           "If you suspect poisoning - refer to Overdose and Poisoning: General Approach")
+
+other_clinical_procedures.blood_glucose_analysis()
 
 # ONLY Adult Protocols Available:
 

@@ -1,9 +1,20 @@
 import demograph_info
 from protocols import GeneralPCP_Adult
+from procedures import other_clinical_procedures
 import string
 
 
 def main():
+    class Patient:
+
+        # Initialize Class - set parameters for object [self] to None
+        def __init__(self):
+            self.conditions = {}  # <-- This serves as a dictionary for a final patient report
+
+        # Method to add key/value pairs to self.conditions dictionary
+        def update_condition(self, key, value):
+            self.conditions[key] = value
+
     # Greet User
     print("Welcome to the Prince William County EMS Protocol Assistant!\n\n"
           "This tool guides users on what procedures and variables to be aware of in the context of their emergency.\n"
@@ -33,4 +44,4 @@ def main():
 if __name__ == "__main__":
     main()
 print('')
-print("This is the end")
+print("This is the very end")
