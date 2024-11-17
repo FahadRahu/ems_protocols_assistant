@@ -30,7 +30,6 @@ def bls_adult_alt_mental_status_syncope():
           "refer to - Medical: Sepsis\n"
           "If you suspect poisoning - refer to Overdose and Poisoning: General Approach")
 
-other_clinical_procedures.blood_glucose_analysis()
 
 # ONLY Adult Protocols Available:
 

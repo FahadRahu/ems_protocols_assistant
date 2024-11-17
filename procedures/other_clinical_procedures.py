@@ -1,6 +1,8 @@
 def blood_glucose_analysis():
-    # This function has 3 functions: relay indications, relay procedure, obtain BGl in mg/dL
-    # This DOES NOT evaluate what values mean, that is going to get explained in the medical_protocols.py protocol
+    """
+    This function has 3 functions: relay indications, relay procedure, obtain BGl in mg/dL
+    This DOES NOT evaluate what values mean, that is going to get explained in the medical_protocols.py protocol
+    """
 
     # Establish Indications for procedure as a list
     bgl_indications = ['Known diabetic history',

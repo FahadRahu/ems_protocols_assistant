@@ -1,7 +1,16 @@
-import demograph_info
-from protocols import GeneralPCP_Adult
-from procedures import other_clinical_procedures
+# IMPORTS:
+
+# Python imports
 import string
+
+# Primary directory imports
+import demograph_info
+
+# Protocols/ directory imports
+from protocols import imports as prot_imports, GeneralPCP_Adult
+
+# Procedures/ directory imports
+# Shouldn't need "from procedures import other_clinical_procedures"
 
 
 def main():

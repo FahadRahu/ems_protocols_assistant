@@ -1,3 +1,15 @@
+# Import modules - add aliases as needed
+from protocols import (
+    medical_protocols as medical,
+    GeneralPCP_Adult
+)
+
+__all__ = [
+    "medical",
+    "GeneralPCP_Adult",
+]
+
+
 """
 THIS IS THE PRIMARY IMPORTS FILE USED FOR main.py
 This file contains all the imports that will be used for main.py
