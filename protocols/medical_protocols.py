@@ -66,7 +66,7 @@ def bls_pediatric_alt_mental_status_syncope():
         print(f"{i}. {guideline}")
 
 
-def bls_adult_diabetic_emergencies(local_age_type):
+def bls_adult_diabetic_emergencies(local_age_type, bgl):
     """Protocol = Adult Diabetic Emergencies
     Why Unfinished?: Nothing is coded - Need to add function if Oral Glucose Gel or sugar was administered
     :return: Nothing as of right now
@@ -75,10 +75,35 @@ def bls_adult_diabetic_emergencies(local_age_type):
     Hypoglycemia in ALL ADULTS IS <= 60 mg/dL
     Hyperglycemia in ALL ADULTS IS >= 250 mg/dL
     """
-    pass
+
+    # Skipping the following line since so many protocols say it, repeating it is redundant.
+    # print("Follow the General Patient Care Protocol for Adult/Pediatric patients")
+
+    if local_age_type == 'Adult':
+        if bgl < 60:
+            print('Patient is experiencing Hypoglycemic:\n')
+            print('1. Consider administering Oral Glucose Gel 15 g, '
+                  'OR glucose containing beverage (e.g. orange-juice).\n'
+                  '2. Patient MUST be fully alert/oriented and able to maintain airway to (self)administer gel/drink.')
+        elif bgl > 250:
+            print('Patient is experiencing Hyperglycemia: \n'
+                  'May potentially be experiencing life-threatening condition: Diabetic Ketoacidosis\n\n'
+                  '1. Strongly recommend ALS on scene/ALS Intercept if time permits\n'
+                  '2. Rapid Transport to hospital if ALS intervention cannot be reached within timely manner. ')
+        else:
+            print('Patient\'s reported Blood Glucose measurement is a normal range')
+    else:
+        if local_age_type is None:
+            print('Error in bls_adult_diabetic_emergencies function, argument for "local_age_type" is None')
+        elif local_age_type is not None:
+            print('Error in bls_adult_diabetic_emergencies function, argument for '
+                  '"local_age_type" is something other than "Adult"')
+        else:
+            print('Error in bls_adult_diabetic_emergencies, argument for "local_age_type" did not successfully compute,'
+                  'I\'m not sure how you got here.')
 
 
-def bls_pediatric_diabetic_emergencies(local_age_type):
+def bls_pediatric_diabetic_emergencies(local_age_type, bgl):
     """Protocol = Pediatric Diabetic Emergencies
     Why Unfinished?: Nothing is coded - Need to add function if Oral Glucose Gel or sugar was administered
     :return: Nothing as of right now
@@ -88,7 +113,48 @@ def bls_pediatric_diabetic_emergencies(local_age_type):
     Hypoglycemia in ALL OTHER PEDIATRICS is <= 60 mg/dL
     Hyperglycemia in ALL PEDIATRICS is >= 250 mg/dL
     """
-    pass
+
+    # Skipping the following line since so many protocols say it, repeating it is redundant.
+    # print("Follow the General Patient Care Protocol for Adult/Pediatric patients")
+
+    if local_age_type in ['Child', 'Infant']:
+        if bgl < 60:
+            print('Patient is experiencing Hypoglycemia:\n')
+            print('1. Consider administering Oral Glucose Gel 15 g, '
+                  'OR glucose containing beverage (e.g. orange-juice) if age-appropriate.\n'
+                  '2. Patient MUST be fully alert/oriented and able to maintain airway to (self)administer gel/drink.')
+        elif bgl > 250:
+            print('Patient is experiencing Hyperglycemia: \n'
+                  'May potentially be experiencing life-threatening condition: Diabetic Ketoacidosis\n\n'
+                  '1. Strongly recommend ALS on scene/ALS Intercept if time permits\n'
+                  '2. Rapid Transport to hospital if ALS intervention cannot be reached within timely manner. ')
+        else:
+            print('Patient\'s reported Blood Glucose measurement is a normal range')
+
+    elif local_age_type == 'Neonate':
+        if bgl < 40:
+            print('Patient is experiencing Hypoglycemia: \n')
+            print('1. Strongly recommend ALS on scene/ALS Intercept if time permits\n'
+                  '2. Rapid Transport to hospital if ALS intervention cannot be reached within timely manner. ')
+        elif bgl > 250:
+            print('Patient is experiencing Hyperglycemia: \n'
+                  'May potentially be experiencing life-threatening condition: Diabetic Ketoacidosis\n\n'
+                  '1. Strongly recommend ALS on scene/ALS Intercept if time permits\n'
+                  '2. Rapid Transport to hospital if ALS intervention cannot be reached within timely manner. ')
+        else:
+            print('Patient\'s reported Blood Glucose measurement is a normal range')
+
+    else:
+        if local_age_type is None:
+            print('Error in bls_pediatric_diabetic_emergencies function, argument for "local_age_type" is None')
+        elif local_age_type is not None:
+            print('Error in bls_pediatric_diabetic_emergencies function, argument for '
+                  '"local_age_type" is something other than "Adult"')
+        else:
+            print('Error in bls_pediatric_diabetic_emergencies, argument for '
+                  '"local_age_type" did not successfully compute,'
+                  'I\'m not sure how you got here.')
+
 
 # ONLY Adult Protocols Available:
 
