@@ -2,7 +2,7 @@ from procedures import other_clinical_procedures
 
 
 # BOTH Adult and Pediatric Protocols Available:
-def bls_adult_medical_allergic_reaction():
+def bls_adult_allergic_reaction():
     """Protocol for altered mental status - needs functions [i.e. was a 12-lead performed? Did you take BGl?]
     :return: Nothing as of right now
     Plans: Need to add functions to return if any interventions were performed.
@@ -14,7 +14,7 @@ def bls_adult_medical_allergic_reaction():
           "repeat once in 5 minutes if indicated")
 
 
-def bls_pediatric_medical_allergic_reaction():
+def bls_pediatric_allergic_reaction():
     print(f"1. Follow the General Patient Care Protocol for Pediatric patients.\n"
           "2. Assist the patient in self-administration of their prescribed epinephrine auto-injector "
           "(Epi-Pen/Epi-Pen Jr.)\n"
@@ -154,6 +154,41 @@ def bls_pediatric_diabetic_emergencies(local_age_type, bgl):
             print('Error in bls_pediatric_diabetic_emergencies, argument for '
                   '"local_age_type" did not successfully compute,'
                   'I\'m not sure how you got here.')
+
+
+def bls_adult_seizure():
+    """
+    Protocol: Medical: Seizure
+    :return: Nothing, simple procedure
+    Plans: Consider writing how an EMT can treat this type of patient.
+    Other Notes:
+    """
+    print("Protect the patient from injury/injuring themselves.")
+
+
+def bls_pediatric_seizure():
+    """
+    Protocol: Medical: Seizure
+    :return: Nothing, simple procedure
+    Plans: Consider writing how an EMT can treat this type of patient.
+    Other Notes:
+    """
+    print("Protect the patient from injury/injuring themselves. \n"
+          "Obtain a Blood Glucose Measurement if you haven\'t already\n"
+          "Providing Oxygen via Nasal Cannula (NC) is sufficient so long as patient is not actively seizing "
+          "or having signs/sympotoms of respiratory distress.")
+
+
+# UNFINISHED
+def bls_adult_sepsis():
+    """
+    Protocol: Medical: Sepsis
+    Why Unfinished: Reevaluate how you want to do your sepsis check and protocol guidelines
+    :return: Sepsis Check Status (Postitive or Negative)
+    Plans: Revisit later, it's an important high-risk shock protocol
+    Other Notes:
+    """
+    print('Notify hospital of a "CODE SEPSIS" during transport prior to arrival')
 
 
 # ONLY Adult Protocols Available:
