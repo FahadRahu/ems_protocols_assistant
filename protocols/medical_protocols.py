@@ -183,14 +183,80 @@ def bls_pediatric_seizure():
 def bls_adult_sepsis():
     """
     Protocol: Medical: Sepsis
-    Why Unfinished: Reevaluate how you want to do your sepsis check and protocol guidelines
-    :return: Sepsis Check Status (Postitive or Negative)
-    Plans: Revisit later, it's an important high-risk shock protocol
+    :return: Nothing
+    Plans: Check existing user data in main.py and base output on that, Sepsis Check Status (Postitive or Negative)
     Other Notes:
     """
     print('Notify hospital of a "CODE SEPSIS" during transport prior to arrival')
+    print('To meet sepsis criteria, the patient must meet the following criteria:\n'
+          '\t1. Suspected Infection\n'
+          '\t2. TWO or more of the following: \n'
+          '\t\ta. Fever (>100.4) or Hypothermia (<96.8)\n'
+          '\t\tb. Elevated Respiratory Rate (>20)\n'
+          '\t\tc. Heart Rate > 90\n'
+          '\t\td. ETCO2 < 30 mmHg')
 
 
+def bls_pediatric_sepsis(age=None, age_type=None):
+    """
+    Protocol: Medical: Sepsis
+    :return: Nothing
+    Plans: Check existing user data in main.py and base output on that, Sepsis Check Status (Postitive or Negative)
+    Other Notes: Pediatric has age specific vitals - heart rate, resp rate, and blood pressure
+    """
+
+    if age_type == 'Neonate':
+        patient_age = age / 365
+    elif age_type == 'Infant':
+        patient_age = age / 12
+    elif age_type == 'Child':
+        patient_age = age
+    else:
+        print("Issue with interpreting age_type")
+        patient_age = age
+
+    pediatric_vitals = {
+        "0D-1W": {"heart_rate": ("<100", ">180"), "resp_rate": ">50", "SBP": "<60"},
+        "1W-1M": {"heart_rate": ("<100", ">180"), "resp_rate": ">40", "SBP": "<70"},
+        "1M-1Y": {"heart_rate": ("<90", "<180"), "resp_rate": ">34", "SBP": "<70"},
+        "2Y-5Y": {"heart_rate": ">140", "resp_rate": ">22", "SBP": "70 + 2*age"},
+        "6Y-12Y": {"heart_rate": ">130", "resp_rate": ">18", "SBP": "70 + 2*age"},
+        "13Y-<18Y": {"heart_rate": ">110", "resp_rate": ">14", "SBP": "<90"}
+    }
+
+    if 0 <= patient_age < 1 / 52:
+        age_category = "0D-1W"
+    elif 1 / 52 <= patient_age < 1 / 12:
+        age_category = "1W-1M"
+    elif 1 / 12 <= patient_age < 1:
+        age_category = "1M-1Y"
+    elif 2 <= patient_age < 5:
+        age_category = "2Y-5Y"
+    elif 6 <= patient_age < 12:
+        age_category = "6Y-12Y"
+    elif 13 <= patient_age < 18:
+        age_category = "13Y-<18Y"
+    else:
+        raise ValueError("Age out of pediatric range")
+
+    print('Notify hospital of a "CODE SEPSIS" during transport prior to arrival')
+    print('To meet sepsis criteria, the patient must meet the following criteria:\n'
+          '\t1. Suspected Infection\n'
+          '\t2. TWO or more of the following: \n'
+          '\t\ta. Fever (>100.4) or Hypothermia (<96.8)\n'
+          '\t\tb. Elevated Respiratory Rate (>20)\n'
+          '\t\tc. Heart Rate > 90\n'
+          '\t\td. ETCO2 < 30 mmHg\n')
+
+    vitals = pediatric_vitals.get(age_category)
+
+    print(f"Vital signs for age category '{age_category}':")
+    for parameter, value in vitals.items():
+        if isinstance(value, tuple):
+            value = " to ".join(value)  # Format range nicely for tuple values
+        print(f"  {parameter.replace('_', ' ').title()}: {value}")
+
+bls_pediatric_sepsis(5, 'Neonate')
 # ONLY Adult Protocols Available:
 
 
