@@ -82,7 +82,7 @@ HOW TO USE imports.py SYSTEM:
                         but if you have very basic functions to do something, it's name needs to be unique.
                 iii. Importing entire modules can increase the amount of memory you use, decreasing performance.
 
-        b. I'll likely end up using this system to begin with, but I'll add an alternative option in 3B. Using this
+        b. I'll likely end up using this system to begin with, but I'll add an alternative_system option in 3B. Using this
             method allows me to import the entire module rather than independently typing every function I use,
             it's also great for scaleability if I add more functions to a file in procedures/
 

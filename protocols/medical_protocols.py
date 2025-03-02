@@ -68,7 +68,7 @@ def bls_pediatric_alt_mental_status_syncope():
 
 def bls_adult_diabetic_emergencies(local_age_type, bgl):
     """Protocol = Adult Diabetic Emergencies
-    Why Unfinished?: Nothing is coded - Need to add function if Oral Glucose Gel or sugar was administered
+    Why Unfinished?: Nothing is coded - Need to  add function if Oral Glucose Gel or sugar was administered
     :return: Nothing as of right now
     Plans: Need to code the protocol, need to return whether oral glucose or sugary food/bev was given
     Other Notes: For now, I'll leave it as 'print{whatever the protocol is}' and make it more complex later.

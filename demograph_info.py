@@ -1,5 +1,12 @@
 # Patient Demographics
 def pt_age_check():
+    """
+    :return:
+    pt_age_type_global = Adult OR Pediatric
+    pt_age_type_local = Adult OR Child OR Infant OR Neonate
+    pt_age = Patient's Age as an Integer
+    age_measurement_type = Years OR Months OR Days
+    """
     print('Patient Age:\n'
           'If the patient is \u2264 1-Year\'s-old: \n'
           'Type the letter "I" for Infant (Aged 1 month - 12 months) or '
