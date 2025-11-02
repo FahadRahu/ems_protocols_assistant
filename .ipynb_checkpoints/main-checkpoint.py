@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 # IMPORTS:
 
 # Python imports
