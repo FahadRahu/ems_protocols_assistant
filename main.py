@@ -1,6 +1,6 @@
 # main.py (simple CLI MVP)
-from src/domain import Patient, Vitals, AgeGroup, Complaint
-from engine import evaluate_rules
+from src.domain import Patient, Vitals, AgeGroup, Complaint
+from src.engine import evaluate_rules
 
 def ask_yes_no(prompt: str) -> bool:
     return input(f"{prompt} (y/n): ").strip().lower().startswith("y")
