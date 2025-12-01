@@ -1,0 +1,177 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "vitalpath-protocol-bundle",
+  "title": "VitalPath Protocol Bundle",
+  "description": "Complete protocol bundle for offline clinical decision support",
+  "type": "object",
+  "required": ["meta", "protocols", "medications", "procedures"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["jurisdiction", "version", "effective_date", "medical_control"],
+      "properties": {
+        "jurisdiction": { "type": "string" },
+        "version": { "type": "string" },
+        "effective_date": { "type": "string", "format": "date" },
+        "revision_date": { "type": "string", "format": "date" },
+        "medical_control": {
+          "type": "object",
+          "required": ["contacts"],
+          "properties": {
+            "contacts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["facility", "phone"],
+                "properties": {
+                  "facility": { "type": "string" },
+                  "phone": { "type": "string" },
+                  "radio_channel": { "type": "string" }
+                }
+              }
+            },
+            "poison_control": { "type": "string" },
+            "chemtrec": { "type": "string" }
+          }
+        }
+      }
+    },
+    "protocols": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Protocol" }
+    },
+    "medications": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Medication" }
+    },
+    "procedures": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Procedure" }
+    }
+  },
+  "definitions": {
+    "Protocol": {
+      "type": "object",
+      "required": ["id", "title", "category", "patient_type", "steps"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { 
+          "type": "string",
+          "enum": ["respiratory", "cardiac_arrest", "cardiac_emergency", 
+                   "environmental", "hazmat", "medical", "obgyn", 
+                   "overdose_poisoning", "pain_management", "trauma"]
+        },
+        "patient_type": {
+          "type": "string",
+          "enum": ["adult", "pediatric", "neonate", "all"]
+        },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "criteria": { "$ref": "#/definitions/Criteria" },
+        "steps": { 
+          "type": "array", 
+          "items": { "$ref": "#/definitions/Step" }
+        },
+        "cross_references": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Criteria": {
+      "type": "object",
+      "properties": {
+        "age_min_months": { "type": "integer" },
+        "age_max_months": { "type": "integer" },
+        "symptoms": { "type": "array", "items": { "type": "string" } },
+        "vital_signs": {
+          "type": "object",
+          "properties": {
+            "sbp_below": { "type": "integer" },
+            "sbp_above": { "type": "integer" },
+            "hr_below": { "type": "integer" },
+            "hr_above": { "type": "integer" },
+            "spo2_below": { "type": "integer" },
+            "gcs_below": { "type": "integer" }
+          }
+        },
+        "exclusions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "required": ["order", "provider_level", "action"],
+      "properties": {
+        "order": { "type": "integer" },
+        "provider_level": {
+          "type": "string",
+          "enum": ["ALL", "BLS", "ALS", "PARAMEDIC", "OLMC"]
+        },
+        "action": { "type": "string" },
+        "medication": { "$ref": "#/definitions/MedicationDose" },
+        "condition": { "type": "string" },
+        "contraindications": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } },
+        "repeat": { "type": "string" },
+        "cross_reference": { "type": "string" }
+      }
+    },
+    "MedicationDose": {
+      "type": "object",
+      "required": ["medication_id", "dose", "route"],
+      "properties": {
+        "medication_id": { "type": "string" },
+        "dose": { "type": "string" },
+        "dose_per_kg": { "type": "number" },
+        "max_dose": { "type": "string" },
+        "route": {
+          "type": "string",
+          "enum": ["PO", "SL", "IV", "IO", "IM", "IN", "NEB", "ODT", "TOPICAL"]
+        },
+        "rate": { "type": "string" }
+      }
+    },
+    "Medication": {
+      "type": "object",
+      "required": ["id", "generic_name", "drug_class"],
+      "properties": {
+        "id": { "type": "string" },
+        "generic_name": { "type": "string" },
+        "trade_names": { "type": "array", "items": { "type": "string" } },
+        "drug_class": { "type": "string" },
+        "mechanism": { "type": "string" },
+        "indications": { "type": "array", "items": { "type": "string" } },
+        "contraindications": { "type": "array", "items": { "type": "string" } },
+        "adult_dosing": { "type": "array", "items": { "$ref": "#/definitions/DosingInfo" } },
+        "pediatric_dosing": { "type": "array", "items": { "$ref": "#/definitions/DosingInfo" } }
+      }
+    },
+    "DosingInfo": {
+      "type": "object",
+      "properties": {
+        "indication": { "type": "string" },
+        "dose": { "type": "string" },
+        "route": { "type": "string" },
+        "max_dose": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "Procedure": {
+      "type": "object",
+      "required": ["id", "title", "authorized_personnel", "steps"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "procedure_type": {
+          "type": "string",
+          "enum": ["administrative", "clinical_airway", "clinical_cardiac", "clinical_other"]
+        },
+        "authorized_personnel": { "type": "array", "items": { "type": "string" } },
+        "indications": { "type": "array", "items": { "type": "string" } },
+        "contraindications": { "type": "array", "items": { "type": "string" } },
+        "equipment": { "type": "array", "items": { "type": "string" } },
+        "steps": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
