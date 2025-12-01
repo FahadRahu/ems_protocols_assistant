@@ -1,0 +1,76 @@
+# data/protocols.yaml
+- name: "Universal - Unresponsive Adult"
+  priority: 100
+  when:
+    - "age_group == ADULT"
+    - "is_unresponsive == True"
+  then:
+    - "Assess ABCs, confirm pulse and breathing"
+    - "If apneic and pulseless → begin CPR, apply AED"
+    - "Manage airway, O2 as indicated"
+    - "Transport priority: HIGH"
+
+- name: "Chest Pain - Adult (Hypotension)"
+  priority: 80
+  when:
+    - "age_group == ADULT"
+    - "complaint == CHEST_PAIN"
+    - "sbp < 90"
+  then:
+    - "Position of comfort, O2 titrate to SpO2 94–99%"
+    - "If SBP < 90: treat for shock, consider rapid transport"
+    - "Aspirin per local BLS scope if allowed"
+    
+- name: "Stroke - Adult"
+  priority: 90
+  when:
+    - "age_group == ADULT"
+    - "complaint == STROKE"
+  then:
+    - "Assess using stroke scale (e.g., FAST, Cincinnati)"
+    - "Maintain airway, O2 as needed to keep SpO2 94–99%"
+    - "Transport priority: HIGH, notify receiving facility"
+
+- name: "Universal - Unresponsive Pediatric"
+  priority: 100
+  when:
+    - "age_group == PEDIATRIC"
+    - "is_unresponsive == True"
+  then:
+    - "Assess ABCs, confirm pulse and breathing"
+    - "If apneic and pulseless → begin CPR"
+    - "Manage airway, O2 as indicated"
+    - "Transport priority: HIGH"
+
+- name: "Seizure - Pediatric"
+  priority: 85  
+  when:
+    - "age_group == PEDIATRIC"
+    - "complaint == SEIZURE"
+  then:
+    - "Protect from injury, do not restrain"
+    - "Maintain airway, O2 as needed to keep SpO2 94–99%"
+    - "If postictal and unresponsive, assess ABCs"
+    - "Transport priority: MEDIUM to HIGH based on condition"
+
+- name: "Respiratory Distress - Pediatric (Wheezing)"
+  priority: 80
+  when:
+    - "age_group == PEDIATRIC"
+    - "complaint == RESPIRATORY_DISTRESS"
+    - "wheezing == True"
+  then:
+    - "Position of comfort, O2 titrate to SpO2 94–99%"
+    - "Consider bronchodilator per local BLS scope if allowed"
+    - "Transport priority: MEDIUM to HIGH based on condition"
+
+- name: "Allergic Reaction - Adult"
+  priority: 75
+  when:
+    - "age_group == ADULT"
+    - "complaint == ALLERGIC_REACTION"
+    - "is_severe == True"
+  then:
+    - "Maintain airway, O2 as needed to keep SpO2 94–99%"
+    - "Consider antihistamines per local BLS scope if allowed"
+    - "Transport priority: HIGH"

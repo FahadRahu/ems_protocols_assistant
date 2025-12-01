@@ -1,52 +1,109 @@
-Unfinished README.md
+# VitalPath
 
-This project is something I keep adding to when I can. It is an assistant tool for EMS personnel to use to determine
-what protocol to follow.
+**Offline-First Clinical Decision Support System for EMS**
 
-HOW TO USE IMPORTS.PY SYSTEM:
+VitalPath transforms the Prince William County Patient Care Manual into a real-time, offline-capable clinical decision support tool for EMS providers.
 
-1. [procedures/{file_name}]: Create functions on independent python files in procedures/
+## 🏗️ Architecture
 
-2. [procedures/import.py]: On procedures/import.py import functions/file using the following format:
-    (from procedures import (
-    '[file_name]' as '[shorter_name]',
-    '[file_name]' as '[shorter_name]',
-    '[file_name]' as '[shorter_name]',
-    {etc. keep going for each file you have})
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     BACKEND (CMS)                          │
+│  ┌─────────────┐    ┌─────────────┐    ┌──────────────┐   │
+│  │  Postgres   │───>│  Compiler   │───>│ JSON Bundle  │   │
+│  └─────────────┘    └─────────────┘    └──────┬───────┘   │
+└──────────────────────────────────────────────│───────────┘
+                                               │
+                        ┌──────────────────────▼───────────┐
+                        │         API: /bundles/latest     │
+                        └──────────────────────┬───────────┘
+                                               │
+        ┌──────────────────────────────────────▼───────────────┐
+        │                  FRONTEND (PWA)                      │
+        │  ┌────────────┐    ┌────────────┐    ┌────────────┐ │
+        │  │ Service    │───>│ IndexedDB  │───>│ Protocol   │ │
+        │  │ Worker     │    │ (Bundle)   │    │ Matcher    │ │
+        │  └────────────┘    └────────────┘    └────────────┘ │
+        └─────────────────────────────────────────────────────┘
+                            │
+                            ▼
+                    [NO NETWORK REQUIRED]
+```
 
-    for example, for importing particular functions - ON PROCEDURES/import.py YOU WRITE:
-    from procedures.other_clinical_procedures import (
-        blood_glucose_analysis,
-        eye_irrigation,
-        splinting,
-    )
+## 📁 Project Structure
 
-    or, for example, for importing the entire module (which I plan on doing) - ON PROCEDURES/import.py YOU WRITE:
-    from procedures import (
-        other_clinical_procedures as ocp,
-        cardiac_clinical_procedures as ccp,
-        airway_clinical_procedures as acp,
-    )
+```
+VitalPath/
+├── backend/          # FastAPI CMS & JSON Compiler
+├── frontend/         # React PWA (Tactical Interface)
+├── shared/           # JSON Schema (source of truth)
+├── data/             # Raw protocols & compiled bundles
+├── archive/          # Legacy code (preserved)
+└── docs/             # Documentation
+```
 
-    A. ANY FILE REFERENCING FUNCTIONS FROM procedures/import.py MUST BE REFERRED WITH 'SHORTER NAME'
+## 🚀 Quick Start
 
-3. [protocols/{file_name}.py]: Import the procedures/import.py file to utilize procedures/ functions
+### Prerequisites
+- Python 3.11+
+- Node.js 20+
+- Docker & Docker Compose (optional)
 
-    for example, for importing PARTICULAR FUNCTIONS - ON PROTOCOLS/MEDICAL_PROTOCOLS.PY YOU WRITE:
-    from procedures.imports import blood_glucose_analysis, ocp
+### Development
 
-    or, for example, if you want the ENTIRE MODULE imported - ON PROTOCOLS/MEDICAL_PROTOCOLS YOU WRITE:
-    from procedures import imports as proc_imports
-    (but this has a problem, calling a function is a lot of words (i.e. - proc_imports.ocp.blood_glucose_analysis())
+**Backend:**
+```bash
+cd backend
+pip install -e ".[dev]"
+uvicorn app.main:app --reload
+```
 
-    or alternatively, for example, if you want the ENTIRE MODULE imported - ON PROCEDURES/import.py YOU WRITE:
-    from procedures.imports import ocp
-    (to call a function from ocp, you would write ex. ocp.blood_glucose_analysis())
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
+**With Docker:**
+```bash
+docker compose up
+```
 
-    A. To Utilize any and ALL functions On protocols/{file_name}
-        you will need to import procedures/import.py using the following format on protocols/{file_name}.py:
-        (from 'procedures' import 'imports' as {shorter_name (For referring to any function in procedures/import.py)})
+## 📋 Key Features
+
+- **Offline-First**: Works without network after initial bundle download
+- **Provider-Level Filtering**: EMT vs Paramedic scope of practice
+- **Dynamic Medical Control**: OLMC contacts loaded from JSON, never hardcoded
+- **Tactical Interface**: Dark mode, large touch targets for field use
+- **PWA**: Installable on mobile devices
+
+## 📖 Documentation
+
+- [Development Plan](vitalpath_plan.md) - Comprehensive development roadmap
+- [Design Document](outline.md) - Architecture and stack decisions
+- [Protocol Source](data/raw/protocol_context.md) - PWC Patient Care Manual
+
+## 🧪 Testing
+
+```bash
+# Backend
+cd backend && pytest tests/ -v
+
+# Frontend
+cd frontend && npm test
+```
+
+## 📄 License
+
+Proprietary - Prince William County Fire & Rescue
+
+---
+
+## Legacy Documentation
+
+> **Note:** The content below is from the original prototype and is preserved for reference.
+> The new architecture uses a different structure. See `archive/` for legacy code.
 
         a. There are ups and downs to using this method instead of 3B:
 

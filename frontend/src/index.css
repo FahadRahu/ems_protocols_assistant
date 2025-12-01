@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VitalPath Global Styles */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Tactical Interface - Large touch targets */
+.btn-tactical {
+  @apply min-h-[48px] min-w-[48px] px-6 py-3 rounded-lg font-semibold 
+         transition-colors duration-150 active:scale-95;
+}
+
+.btn-primary {
+  @apply btn-tactical bg-vp-accent hover:bg-vp-accent/80 text-white;
+}
+
+.btn-secondary {
+  @apply btn-tactical bg-vp-dark hover:bg-vp-dark/80 text-white border border-gray-600;
+}
+
+.btn-danger {
+  @apply btn-tactical bg-vp-danger hover:bg-vp-danger/80 text-white;
+}
+
+.btn-success {
+  @apply btn-tactical bg-vp-success hover:bg-vp-success/80 text-white;
+}

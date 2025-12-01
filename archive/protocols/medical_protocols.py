@@ -13,7 +13,6 @@ def bls_adult_allergic_reaction():
           "3. If wheezing is present: Administer Albuterol 2.5 mg via nebulizer - "
           "repeat once in 5 minutes if indicated")
 
-
 def bls_pediatric_allergic_reaction():
     print(f"1. Follow the General Patient Care Protocol for Pediatric patients.\n"
           "2. Assist the patient in self-administration of their prescribed epinephrine auto-injector "
@@ -256,7 +255,6 @@ def bls_pediatric_sepsis(age=None, age_type=None):
             value = " to ".join(value)  # Format range nicely for tuple values
         print(f"  {parameter.replace('_', ' ').title()}: {value}")
 
-bls_pediatric_sepsis(5, 'Neonate')
 # ONLY Adult Protocols Available:
 
 
